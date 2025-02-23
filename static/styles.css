@@ -1,0 +1,369 @@
+body {
+  font-family: 'Arial', sans-serif;
+  background: linear-gradient(135deg, #f0f2f5, #d9e2ec);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 100vh;
+  margin: 0;
+  padding: 20px;
+  box-sizing: border-box;
+  transition: background 0.5s ease, color 0.3s ease;
+}
+
+body.dark {
+  background: linear-gradient(135deg, #1a1a1a, #2d2d2d);
+  color: #f0f0f0;
+}
+
+header, #password-container, #strength-container, #password-length-container, #options-container, #history-container, footer {
+  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+}
+
+header {
+  position: relative;
+  width: 100%;
+  max-width: 400px;
+  margin-bottom: 20px;
+  animation: slideIn 0.5s ease-out;
+}
+
+@keyframes slideIn {
+  from { transform: translateY(-100%); }
+  to { transform: translateY(0); }
+}
+
+.header-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+h1, h3 {
+  color: #333;
+  margin: 0;
+  text-align: center;
+  transition: color 0.3s ease;
+}
+
+h1 {
+  font-size: 2.5rem;
+}
+
+h3 {
+  font-size: 1.2rem;
+  margin-bottom: 10px;
+}
+
+body.dark h1, body.dark h3 {
+  color: #f0f0f0;
+}
+
+.profile-icon img {
+  border-radius: 50%;
+  transition: transform 0.3s ease;
+}
+
+.profile-icon:hover img {
+  transform: scale(1.1) rotate(10deg);
+}
+
+.theme-toggle {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  margin-top: 10px;
+}
+
+.theme-icon {
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.theme-icon svg {
+  color: #555;
+  transition: color 0.3s ease;
+}
+
+body.dark .theme-icon svg {
+  color: #ccc;
+}
+
+.theme-toggle:hover .theme-icon {
+  transform: rotate(15deg);
+}
+
+#password-container {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 15px;
+  width: 100%;
+  max-width: 400px;
+}
+
+#password {
+  flex-grow: 1;
+  padding: 12px;
+  font-size: 1.1rem;
+  border: 2px solid #ddd;
+  border-radius: 5px;
+  background-color: #fff;
+  color: #333;
+  outline: none;
+  cursor: default;
+  transition: transform 0.2s ease, opacity 0.3s ease, background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+}
+
+#password.regen {
+  animation: regen 0.5s ease;
+}
+
+@keyframes regen {
+  0% { transform: scale(0.95); opacity: 0; }
+  50% { transform: scale(1.05); }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+body.dark #password {
+  border-color: #444;
+  background-color: #2a2a2a;
+  color: #f0f0f0;
+}
+
+#copy-button, #generate-password, #clear-history {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  padding: 10px 20px;
+  font-size: 1rem;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+#copy-button {
+  background-color: #28a745;
+}
+
+#copy-button:hover {
+  background-color: #218838;
+  transform: translateY(-2px);
+}
+
+#copy-button:active {
+  transform: scale(0.95);
+}
+
+#strength-container {
+  margin-bottom: 20px;
+  font-size: 1rem;
+  color: #555;
+}
+
+body.dark #strength-container {
+  color: #ccc;
+}
+
+#strength-value {
+  font-weight: bold;
+  color: #007bff;
+  transition: color 0.3s ease;
+}
+
+#strength-value.weak { color: #dc3545; }
+#strength-value.medium { color: #ffc107; }
+#strength-value.strong { color: #28a745; }
+
+#password-length-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 20px;
+  width: 100%;
+  max-width: 400px;
+}
+
+#password-length-container label {
+  font-size: 1.1rem;
+  color: #555;
+  transition: color 0.3s ease;
+}
+
+body.dark #password-length-container label {
+  color: #ccc;
+}
+
+#length-display {
+  font-weight: bold;
+  color: #007bff;
+  transition: color 0.3s ease;
+}
+
+body.dark #length-display {
+  color: #4dabf7;
+}
+
+#password-length {
+  width: 100%;
+  padding: 8px 0;
+  transition: all 0.3s ease;
+}
+
+body.dark #password-length {
+  background: #2a2a2a;
+}
+
+#generate-password {
+  background-color: #007bff;
+  padding: 10px 20px;
+}
+
+#generate-password:hover {
+  background-color: #0056b3;
+  transform: translateY(-2px);
+}
+
+#generate-password:active {
+  transform: scale(0.95);
+}
+
+#options-container {
+  display: flex;
+  gap: 20px;
+  margin-bottom: 30px;
+  width: 100%;
+  max-width: 400px;
+}
+
+#options-container label {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 1rem;
+  color: #333;
+  padding: 5px 10px;
+  border-radius: 5px;
+  transition: background-color 0.2s ease, color 0.3s ease, transform 0.2s ease;
+}
+
+#options-container label:hover {
+  background-color: #e9ecef;
+  transform: scale(1.05);
+}
+
+body.dark #options-container label {
+  color: #ccc;
+}
+
+body.dark #options-container label:hover {
+  background-color: #3a3a3a;
+}
+
+#history-container {
+  width: 100%;
+  max-width: 400px;
+  margin-bottom: 30px;
+}
+
+#password-history {
+  list-style: none;
+  padding: 0;
+  max-height: 150px;
+  overflow-y: auto;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  background-color: #fff;
+  transition: border-color 0.3s ease, background-color 0.3s ease;
+}
+
+body.dark #password-history {
+  border-color: #444;
+  background-color: #2a2a2a;
+}
+
+#password-history li {
+  padding: 8px;
+  font-size: 1rem;
+  color: #333;
+  border-bottom: 1px solid #eee;
+  transition: background-color 0.2s ease, color 0.3s ease, transform 0.2s ease;
+}
+
+#password-history li:hover {
+  background-color: #f8f9fa;
+  transform: translateX(5px);
+  cursor: pointer;
+}
+
+body.dark #password-history li {
+  color: #f0f0f0;
+  border-bottom-color: #444;
+}
+
+body.dark #password-history li:hover {
+  background-color: #3a3a3a;
+}
+
+#password-history li:last-child {
+  border-bottom: none;
+}
+
+#clear-history {
+  margin-top: 10px;
+  background-color: #dc3545;
+  padding: 8px 16px;
+  font-size: 0.9rem;
+}
+
+#clear-history:hover {
+  background-color: #c82333;
+  transform: translateY(-2px);
+}
+
+#clear-history:active {
+  transform: scale(0.95);
+}
+
+footer {
+  margin-top: 40px;
+  text-align: center;
+  color: #777;
+  font-size: 0.9rem;
+}
+
+body.dark footer {
+  color: #aaa;
+}
+
+/* Responsive Design */
+@media (max-width: 500px) {
+  h1 {
+      font-size: 2rem;
+  }
+
+  header {
+      text-align: center;
+  }
+
+  .header-content {
+      flex-direction: column;
+      gap: 10px;
+  }
+
+  #password-container, #options-container {
+      flex-direction: column;
+      gap: 15px;
+  }
+
+  #password, #copy-button, #generate-password {
+      width: 100%;
+  }
+
+  #options-container {
+      align-items: flex-start;
+  }
+}
