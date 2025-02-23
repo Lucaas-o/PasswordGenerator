@@ -45,7 +45,7 @@ To run this project locally, follow these steps:
 3. Open the index.html file in your browser.
 
 ## Live Demo
-Check out the live demo of the project [here](https://github.com/Lucaas-o/PasswordGenerator).
+Check out the live demo of the project [here](https://lucaas-o.github.io/PasswordGenerator/).
 
 ## Contributing
 
