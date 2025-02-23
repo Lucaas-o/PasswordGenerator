@@ -1,6 +1,6 @@
 # Password Generator
 
-![Password Generation Preview](./short_preview.png)
+![Password Generation Preview](./media/short_preview.png)
 
 A simple and secure password generator web application. Generate strong, random passwords with customizable options such as length, uppercase letters, numbers, and symbols. Includes a dark mode theme and password history feature.
 
@@ -62,8 +62,8 @@ Please ensure your code follows the existing style and includes appropriate test
 This project is licensed under the MIT License. See the [LICENSE](./LICENSE) file for details.
 
 ## Screenshots
-![Light Mode](./light_mode_preview.png)
-![Dark Mode](./dark_mode_preview.png)
+![Light Mode](./media/light_mode_preview.png)
+![Dark Mode](./media/dark_mode_preview.png)
 
 ## Author
 
