@@ -39,8 +39,8 @@ To run this project locally, follow these steps:
    git clone https://github.com/your-username/password-generator.git
 
 2. Navigate to the project directory:
-  ```bash
-  cd password-generator
+   ```bash
+   cd password-generator
 
 3. Open the index.html file in your browser.
 
