@@ -14,14 +14,6 @@ A modern, fast, and privacy-first password generator and local browser vault bui
 - **Dark & light themes** – automatically adapts to your OS preference and remembers your manual toggle.
 - **Zero dependencies & 100% client-side** – no frameworks, no build steps, and no external servers.
 
-## How to Use
-
-1. **Configure & Generate** – set your desired password length (`8–64`) and select character types (`a-z`, `A-Z`, `0-9`, symbols), then click **Generate Password** or the refresh icon.
-2. **Copy or Mask** – click the copy button to copy the password to your clipboard, or use the eye icon to mask/unmask it on screen.
-3. **Save to Vault** – click **Save Current Password to Vault** for one-click storage, or fill out the form with a service label, username, and password.
-4. **Encrypt with a Session Key (Optional)** – enter a passphrase in the encryption bar and click **Unlock / Encrypt** to encrypt stored secrets locally using AES-GCM. Click **Lock** to clear the passphrase from memory.
-5. **Manage Saved Entries** – filter entries via the search bar, and use **Show**, **Copy**, **Edit**, or **Delete** on any item.
-
 ## Security & Privacy Notice
 
 - **100% local execution:** No passwords or metadata are ever transmitted over the network.
@@ -41,11 +33,12 @@ PasswordGenerator/
 
 ## Local Usage
 
-Clone the repository and open `index.html` in your browser—no installation or build step required:
+Clone and open `index.html` — no build step required:
 
 ```bash
 git clone https://github.com/Lucaas-o/PasswordGenerator.git
 cd PasswordGenerator
+open index.html
 ```
 
 ## Live Demo
