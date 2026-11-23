@@ -1,152 +1,526 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en" data-theme="light">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Password Generator — Strong, Secure, Instant</title>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>VaultPass — Password Generator &amp; Local Vault</title>
 
-  <!-- SEO / social -->
-  <meta name="description" content="Generate strong, random, cryptographically secure passwords with customizable length and character options. Free, private, runs entirely in your browser.">
-  <meta name="theme-color" content="#0d9488">
-  <meta property="og:title" content="Password Generator">
-  <meta property="og:description" content="Generate strong, cryptographically secure passwords right in your browser.">
-  <meta property="og:type" content="website">
-  <meta property="og:url" content="https://lucaas-o.github.io/PasswordGenerator/">
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Password Generator">
-  <meta name="twitter:description" content="Generate strong, cryptographically secure passwords right in your browser.">
+    <!-- SEO / social -->
+    <meta
+      name="description"
+      content="Generate cryptographically secure passwords and manage a local browser vault with customizable character rules and strength analysis."
+    />
+    <meta name="theme-color" content="#0d9488" />
+    <meta
+      property="og:title"
+      content="VaultPass — Password Generator &amp; Local Vault"
+    />
+    <meta
+      property="og:description"
+      content="Generate strong passwords and manage saved credentials locally in your browser."
+    />
+    <meta property="og:type" content="website" />
+    <meta
+      property="og:url"
+      content="https://lucaas-o.github.io/PasswordGenerator/"
+    />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta
+      name="twitter:title"
+      content="VaultPass — Password Generator &amp; Local Vault"
+    />
+    <meta
+      name="twitter:description"
+      content="Generate strong passwords and manage saved credentials locally in your browser."
+    />
 
-  <!-- Inline SVG favicon (lock) — zero extra request -->
-  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%230d9488' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Crect x='3' y='11' width='18' height='11' rx='2'/%3E%3Cpath d='M7 11V7a5 5 0 0 1 10 0v4'/%3E%3C/svg%3E">
+    <!-- Inline SVG favicon (lock) -->
+    <link
+      rel="icon"
+      href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%230d9488' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Crect x='3' y='11' width='18' height='11' rx='2'/%3E%3Cpath d='M7 11V7a5 5 0 0 1 10 0v4'/%3E%3C/svg%3E"
+    />
 
-  <link rel="stylesheet" href="static/styles.css">
-  <script src="static/script.js" defer></script>
-</head>
-<body>
-  <header>
-    <div class="header-content">
-      <div class="brand">
-        <span class="brand-mark" aria-hidden="true">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <rect x="3" y="11" width="18" height="11" rx="2"></rect>
-            <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
-          </svg>
-        </span>
-        <h1>Password Generator</h1>
-      </div>
-
-      <div class="header-actions">
-        <a href="https://github.com/Lucaas-o" target="_blank" rel="noopener noreferrer" class="icon-link" aria-label="View author's GitHub profile">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-            <path d="M12 .5C5.7.5.5 5.7.5 12c0 5.1 3.3 9.4 7.9 10.9.6.1.8-.2.8-.5v-2c-3.2.7-3.9-1.4-3.9-1.4-.5-1.3-1.3-1.7-1.3-1.7-1.1-.7.1-.7.1-.7 1.2.1 1.8 1.2 1.8 1.2 1 1.8 2.7 1.3 3.4 1 .1-.7.4-1.3.7-1.6-2.6-.3-5.3-1.3-5.3-5.7 0-1.3.5-2.3 1.2-3.1-.1-.3-.5-1.5.1-3.1 0 0 1-.3 3.3 1.2a11.5 11.5 0 0 1 6 0C17.3 4.6 18.3 5 18.3 5c.6 1.6.2 2.8.1 3.1.8.8 1.2 1.8 1.2 3.1 0 4.4-2.7 5.4-5.3 5.7.4.4.8 1.1.8 2.2v3.3c0 .3.2.6.8.5 4.6-1.5 7.9-5.8 7.9-10.9C23.5 5.7 18.3.5 12 .5z"></path>
-          </svg>
-        </a>
-        <button type="button" class="theme-toggle" id="theme-switch" aria-label="Switch to dark theme" aria-pressed="false">
-          <svg class="moon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
-          </svg>
-          <svg class="sun" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-            <circle cx="12" cy="12" r="5"></circle>
-            <line x1="12" y1="1" x2="12" y2="3"></line>
-            <line x1="12" y1="21" x2="12" y2="23"></line>
-            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
-            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
-            <line x1="1" y1="12" x2="3" y2="12"></line>
-            <line x1="21" y1="12" x2="23" y2="12"></line>
-            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
-            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
-          </svg>
-        </button>
-      </div>
-    </div>
-  </header>
-
-  <main class="card">
-    <!-- Output -->
-    <section class="section" aria-label="Generated password">
-      <div id="password-container">
-        <input type="text" id="password" readonly aria-label="Generated password" autocomplete="off" spellcheck="false">
-        <button type="button" id="copy-button" class="btn-icon" aria-label="Copy password to clipboard">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-            <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
-            <rect x="8" y="2" width="8" height="4" rx="1" ry="1"></rect>
-          </svg>
-        </button>
-      </div>
-
-      <!-- Visual strength meter -->
-      <div id="strength-container">
-        <div class="strength-head">
-          <span>Strength</span>
-          <span id="strength-value" class="medium">Medium</span>
+    <link rel="stylesheet" href="static/styles.css" />
+    <script src="static/script.js" defer></script>
+  </head>
+  <body>
+    <header>
+      <div class="header-content">
+        <div class="brand">
+          <span class="brand-mark" aria-hidden="true">
+            <svg
+              width="22"
+              height="22"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <rect x="3" y="11" width="18" height="11" rx="2"></rect>
+              <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+            </svg>
+          </span>
+          <div>
+            <h1>VaultPass</h1>
+            <p class="brand-subtitle">Generator &amp; Local Vault</p>
+          </div>
         </div>
-        <div class="strength-track" role="progressbar" aria-label="Password strength" aria-valuemin="0" aria-valuemax="100" aria-valuenow="50">
-          <div class="strength-bar medium" id="strength-bar"></div>
+
+        <div class="header-actions">
+          <a
+            href="https://github.com/Lucaas-o"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="icon-link"
+            aria-label="View author's GitHub profile"
+          >
+            <svg
+              width="20"
+              height="20"
+              viewBox="0 0 24 24"
+              fill="currentColor"
+              aria-hidden="true"
+            >
+              <path
+                d="M12 .5C5.7.5.5 5.7.5 12c0 5.1 3.3 9.4 7.9 10.9.6.1.8-.2.8-.5v-2c-3.2.7-3.9-1.4-3.9-1.4-.5-1.3-1.3-1.7-1.3-1.7-1.1-.7.1-.7.1-.7 1.2.1 1.8 1.2 1.8 1.2 1 1.8 2.7 1.3 3.4 1 .1-.7.4-1.3.7-1.6-2.6-.3-5.3-1.3-5.3-5.7 0-1.3.5-2.3 1.2-3.1-.1-.3-.5-1.5.1-3.1 0 0 1-.3 3.3 1.2a11.5 11.5 0 0 1 6 0C17.3 4.6 18.3 5 18.3 5c.6 1.6.2 2.8.1 3.1.8.8 1.2 1.8 1.2 3.1 0 4.4-2.7 5.4-5.3 5.7.4.4.8 1.1.8 2.2v3.3c0 .3.2.6.8.5 4.6-1.5 7.9-5.8 7.9-10.9C23.5 5.7 18.3.5 12 .5z"
+              ></path>
+            </svg>
+          </a>
+          <button
+            type="button"
+            class="theme-toggle"
+            id="theme-switch"
+            aria-label="Switch to dark theme"
+            aria-pressed="false"
+          >
+            <svg
+              class="moon"
+              width="20"
+              height="20"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              aria-hidden="true"
+            >
+              <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+            </svg>
+            <svg
+              class="sun"
+              width="20"
+              height="20"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              aria-hidden="true"
+            >
+              <circle cx="12" cy="12" r="5"></circle>
+              <line x1="12" y1="1" x2="12" y2="3"></line>
+              <line x1="12" y1="21" x2="12" y2="23"></line>
+              <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+              <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+              <line x1="1" y1="12" x2="3" y2="12"></line>
+              <line x1="21" y1="12" x2="23" y2="12"></line>
+              <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+              <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+            </svg>
+          </button>
         </div>
       </div>
-    </section>
+    </header>
 
-    <!-- Length -->
-    <section class="section" aria-label="Password length">
-      <label class="control-label" for="password-length">
-        <span>Password length</span>
-        <span id="length-display">16</span>
-      </label>
-      <input type="range" id="password-length" min="8" max="32" value="16" aria-describedby="length-display">
-    </section>
+    <main class="app-grid">
+      <!-- Generator Card -->
+      <section class="card" aria-label="Password generator">
+        <div class="section">
+          <div id="password-container">
+            <input
+              type="text"
+              id="password"
+              readonly
+              aria-label="Generated password"
+              autocomplete="off"
+              spellcheck="false"
+            />
+            <button
+              type="button"
+              id="toggle-visibility"
+              class="btn-secondary-icon"
+              aria-label="Hide password"
+              aria-pressed="false"
+              title="Toggle visibility"
+            >
+              <svg
+                class="eye-open"
+                width="19"
+                height="19"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                aria-hidden="true"
+              >
+                <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                <circle cx="12" cy="12" r="3"></circle>
+              </svg>
+              <svg
+                class="eye-closed"
+                width="19"
+                height="19"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                aria-hidden="true"
+              >
+                <path
+                  d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94"
+                ></path>
+                <path
+                  d="M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19"
+                ></path>
+                <line x1="1" y1="1" x2="23" y2="23"></line>
+              </svg>
+            </button>
+            <button
+              type="button"
+              id="copy-button"
+              class="btn-icon"
+              aria-label="Copy password to clipboard"
+              title="Copy password"
+            >
+              <svg
+                width="19"
+                height="19"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                aria-hidden="true"
+              >
+                <path
+                  d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"
+                ></path>
+                <rect x="8" y="2" width="8" height="4" rx="1" ry="1"></rect>
+              </svg>
+            </button>
+          </div>
 
-    <!-- Options -->
-    <section class="section" aria-label="Character options">
-      <h3>Include</h3>
-      <div id="options-container">
-        <label class="option"><input type="checkbox" id="uppercase" checked> Uppercase</label>
-        <label class="option"><input type="checkbox" id="numbers" checked> Numbers</label>
-        <label class="option"><input type="checkbox" id="symbols" checked> Symbols</label>
-      </div>
-    </section>
+          <!-- Visual strength meter -->
+          <div id="strength-container">
+            <div class="strength-head">
+              <span>Strength <small id="entropy-label"></small></span>
+              <span id="strength-value" class="medium">Medium</span>
+            </div>
+            <div
+              class="strength-track"
+              role="progressbar"
+              aria-label="Password strength"
+              aria-valuemin="0"
+              aria-valuemax="100"
+              aria-valuenow="66"
+            >
+              <div class="strength-bar medium" id="strength-bar"></div>
+            </div>
+          </div>
+        </div>
 
-    <!-- Generate -->
-    <section class="section">
-      <div class="generate-row">
-        <button type="button" id="generate-password" class="btn-primary">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-            <path d="M23 4v6h-6"></path>
-            <path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"></path>
-          </svg>
-          Generate Password
-        </button>
-        <button type="button" id="regen-button" class="btn-regen" aria-label="Regenerate with current settings">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-            <polyline points="23 4 23 10 17 10"></polyline>
-            <polyline points="1 20 1 14 7 14"></polyline>
-            <path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"></path>
-          </svg>
-        </button>
-      </div>
-    </section>
+        <!-- Length -->
+        <div class="section">
+          <label class="control-label" for="password-length">
+            <span>Password length</span>
+            <span id="length-display">16</span>
+          </label>
+          <input
+            type="range"
+            id="password-length"
+            min="8"
+            max="64"
+            value="16"
+            aria-describedby="length-display"
+          />
+        </div>
 
-    <!-- History -->
-    <section class="section" aria-label="Recent passwords">
-      <h3>Recent Passwords</h3>
-      <ul id="password-history"></ul>
-      <button type="button" id="clear-history" class="btn-ghost">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-          <polyline points="3 6 5 6 21 6"></polyline>
-          <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
-        </svg>
-        Clear History
-      </button>
-    </section>
-  </main>
+        <!-- Options -->
+        <div class="section">
+          <h3>Character sets</h3>
+          <div id="options-container">
+            <label class="option"
+              ><input type="checkbox" id="lowercase" checked /> Lowercase
+              (a-z)</label
+            >
+            <label class="option"
+              ><input type="checkbox" id="uppercase" checked /> Uppercase
+              (A-Z)</label
+            >
+            <label class="option"
+              ><input type="checkbox" id="numbers" checked /> Numbers
+              (0-9)</label
+            >
+            <label class="option"
+              ><input type="checkbox" id="symbols" checked /> Symbols
+              (!@#...)</label
+            >
+          </div>
+        </div>
 
-  <footer>
-    <p>&copy; <span id="year">2025</span> Password Generator · Runs entirely in your browser</p>
-  </footer>
+        <!-- Generate & Quick Save -->
+        <div class="section">
+          <div class="generate-row">
+            <button type="button" id="generate-password" class="btn-primary">
+              <svg
+                width="18"
+                height="18"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                aria-hidden="true"
+              >
+                <path d="M23 4v6h-6"></path>
+                <path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"></path>
+              </svg>
+              Generate Password
+            </button>
+            <button
+              type="button"
+              id="regen-button"
+              class="btn-regen"
+              aria-label="Regenerate with current settings"
+              title="Regenerate"
+            >
+              <svg
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                aria-hidden="true"
+              >
+                <polyline points="23 4 23 10 17 10"></polyline>
+                <polyline points="1 20 1 14 7 14"></polyline>
+                <path
+                  d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"
+                ></path>
+              </svg>
+            </button>
+          </div>
+          <button type="button" id="quick-save-btn" class="btn-outline-full">
+            <svg
+              width="16"
+              height="16"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              aria-hidden="true"
+            >
+              <path
+                d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"
+              ></path>
+              <polyline points="17 21 17 13 7 13 7 21"></polyline>
+              <polyline points="7 3 7 8 15 8"></polyline>
+            </svg>
+            Save Current Password to Vault
+          </button>
+        </div>
 
-  <!-- Toast (replaces alert) -->
-  <div id="toast" role="status" aria-live="polite"></div>
+        <!-- Session History -->
+        <div class="section">
+          <div class="section-row">
+            <h3>Session History</h3>
+            <button type="button" id="clear-history" class="btn-text-danger">
+              Clear
+            </button>
+          </div>
+          <ul id="password-history"></ul>
+        </div>
+      </section>
 
-  <!-- Screen-reader-only live region for dynamic announcements -->
-  <div id="sr-live" aria-live="polite" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);"></div>
-</body>
+      <!-- Vault Management Card -->
+      <section class="card vault-card" aria-label="Saved passwords vault">
+        <div class="vault-header">
+          <div>
+            <h2>Saved Passwords</h2>
+            <p class="vault-caption">
+              Stored locally in your browser · Never sent to any server
+            </p>
+          </div>
+          <span class="vault-count" id="vault-count">0 items</span>
+        </div>
+
+        <!-- Optional session encryption key -->
+        <div class="encryption-box">
+          <div class="encryption-top">
+            <label for="master-key-input"
+              >Optional session encryption key</label
+            >
+            <span class="encryption-badge" id="encryption-status"
+              >Unencrypted local storage</span
+            >
+          </div>
+          <div class="encryption-row">
+            <input
+              type="password"
+              id="master-key-input"
+              placeholder="Enter passphrase to encrypt/unlock vault..."
+              autocomplete="off"
+            />
+            <button type="button" id="apply-key-btn" class="btn-secondary">
+              Unlock / Encrypt
+            </button>
+            <button
+              type="button"
+              id="lock-key-btn"
+              class="btn-ghost-sm"
+              title="Clear session key"
+            >
+              Lock
+            </button>
+          </div>
+        </div>
+
+        <!-- Add / Edit Credential Form -->
+        <form id="vault-form" class="vault-form" novalidate>
+          <input type="hidden" id="editing-id" />
+          <div class="form-grid">
+            <div class="field">
+              <label for="entry-label">Service or label *</label>
+              <input
+                type="text"
+                id="entry-label"
+                placeholder="e.g. GitHub, Email, Bank"
+                required
+                maxlength="80"
+              />
+            </div>
+            <div class="field">
+              <label for="entry-username">Username / account</label>
+              <input
+                type="text"
+                id="entry-username"
+                placeholder="e.g. lucas@example.com"
+                maxlength="100"
+              />
+            </div>
+          </div>
+          <div class="field">
+            <div class="field-label-row">
+              <label for="entry-password">Password *</label>
+              <button
+                type="button"
+                id="use-generated-btn"
+                class="btn-inline-link"
+              >
+                Use generated password
+              </button>
+            </div>
+            <input
+              type="text"
+              id="entry-password"
+              class="mono-input"
+              placeholder="Enter or generate a password"
+              required
+              autocomplete="off"
+              spellcheck="false"
+            />
+          </div>
+          <div class="form-actions">
+            <button type="submit" id="save-entry-btn" class="btn-primary">
+              <span id="save-entry-text">Save to Vault</span>
+            </button>
+            <button
+              type="button"
+              id="cancel-edit-btn"
+              class="btn-secondary hidden"
+            >
+              Cancel
+            </button>
+          </div>
+        </form>
+
+        <!-- Search & Filter -->
+        <div class="vault-toolbar">
+          <input
+            type="search"
+            id="vault-search"
+            placeholder="Search saved entries..."
+            aria-label="Search saved passwords"
+          />
+          <button type="button" id="clear-vault-btn" class="btn-ghost">
+            <svg
+              width="15"
+              height="15"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              aria-hidden="true"
+            >
+              <polyline points="3 6 5 6 21 6"></polyline>
+              <path
+                d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"
+              ></path>
+            </svg>
+            Delete All
+          </button>
+        </div>
+
+        <!-- Saved items list -->
+        <ul id="vault-list" class="vault-list"></ul>
+
+        <p class="security-note">
+          <strong>Security note:</strong> Browser storage is convenient for
+          personal/local use, but vulnerable if an attacker gains XSS access to
+          the page or physical access to an unlocked device. Use a dedicated
+          password manager for high-value accounts.
+        </p>
+      </section>
+    </main>
+
+    <footer>
+      <p>
+        &copy; <span id="year">2026</span> VaultPass · Runs 100% locally in your
+        browser
+      </p>
+    </footer>
+
+    <!-- Toast -->
+    <div id="toast" role="status" aria-live="polite"></div>
+
+    <!-- Screen-reader live region -->
+    <div
+      id="sr-live"
+      aria-live="polite"
+      style="
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        overflow: hidden;
+        clip: rect(0 0 0 0);
+      "
+    ></div>
+  </body>
 </html>
